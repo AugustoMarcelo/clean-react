@@ -32,6 +32,7 @@ button {
   border: none;
   line-height: 60px;
   transition: opacity, 0.3s;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.9;
