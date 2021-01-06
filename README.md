@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/AugustoMarcelo/clean-react.svg?branch=main)](https://travis-ci.org/AugustoMarcelo/clean-react)
+[![Coverage Status](https://coveralls.io/repos/github/AugustoMarcelo/clean-react/badge.svg?branch=main)](https://coveralls.io/github/AugustoMarcelo/clean-react?branch=main)
 
 # **4Dev React - Enquetes para Programadores**
 
