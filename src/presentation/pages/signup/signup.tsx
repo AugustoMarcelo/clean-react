@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { LoginHeader, Footer, Input, FormStatus } from '@/presentation/components'
 import Context from '@/presentation/contexts/form/form-context'
 import Styles from './signup-styles.scss'
@@ -32,12 +32,18 @@ const SignUp: React.FC<Props> = ({ validation }: Props) => {
     }))
   }, [state.name, state.email, state.password, state.passwordConfirmation])
 
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>): Promise<void> => {
+    event.preventDefault()
+
+    setState({ ...state, isLoading: true })
+  }
+
   return (
     <div className={Styles.signup}>
       <LoginHeader />
 
       <Context.Provider value={{ state, setState }}>
-        <form className={Styles.form}>
+        <form className={Styles.form} data-testid="form" onSubmit={handleSubmit}>
           <h2>Criar conta</h2>
 
           <Input type="text" name="name" placeholder="Digite seu nome" />
