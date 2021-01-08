@@ -65,26 +65,6 @@ describe('Login Component', () => {
     Helper.testStatusForField(sut, 'password', validationError)
   })
 
-  test('Should call validation with correct email', () => {
-    const validationError = faker.random.words()
-    const { sut, validationSpy } = makeSut({ validationError })
-    const emailInput = sut.getByTestId('email')
-    const email = faker.internet.email()
-    fireEvent.input(emailInput, { target: { value: email } })
-    expect(validationSpy.fieldName).toBe('email')
-    expect(validationSpy.fieldValue).toBe(email)
-  })
-
-  test('Should call validation with correct password', () => {
-    const validationError = faker.random.words()
-    const { sut, validationSpy } = makeSut({ validationError })
-    const passwordInput = sut.getByTestId('password')
-    const password = faker.internet.password()
-    fireEvent.input(passwordInput, { target: { value: password } })
-    expect(validationSpy.fieldName).toBe('password')
-    expect(validationSpy.fieldValue).toBe(password)
-  })
-
   test('Should show email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
