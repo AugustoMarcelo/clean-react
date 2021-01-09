@@ -4,7 +4,7 @@ import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import faker from 'faker'
 import SignUp from './signup'
-import { AddAccountSpy, Helper, SaveAccessTokenMock, ValidationSpy } from '@/presentation/test'
+import { AddAccountSpy, Helper, SaveAccessTokenMock, ValidationStub } from '@/presentation/test'
 import { EmailInUseError } from '@/domain/errors'
 
 type SutTypes = {
@@ -20,14 +20,14 @@ type SutParams = {
 const history = createMemoryHistory({ initialEntries: ['/signup'] })
 
 const makeSut = (params?: SutParams): SutTypes => {
-  const validationSpy = new ValidationSpy()
+  const validationStub = new ValidationStub()
   const addAccountSpy = new AddAccountSpy()
   const saveAccessTokenMock = new SaveAccessTokenMock()
-  validationSpy.errorMessage = params?.validationError
+  validationStub.errorMessage = params?.validationError
   const sut = render(
     <Router history={history}>
       <SignUp
-        validation={validationSpy}
+        validation={validationStub}
         addAccount={addAccountSpy}
         saveAccessToken={saveAccessTokenMock}
       />

@@ -3,13 +3,13 @@ import { Router } from 'react-router-dom'
 import { createMemoryHistory } from 'history'
 import faker from 'faker'
 import { render, RenderResult, fireEvent, cleanup, waitFor } from '@testing-library/react'
-import { ValidationSpy, AuthenticationSpy, SaveAccessTokenMock, Helper } from '@/presentation/test'
+import { ValidationStub, AuthenticationSpy, SaveAccessTokenMock, Helper } from '@/presentation/test'
 import { Login } from '@/presentation/pages'
 import { InvalidCredentialsError } from '@/domain/errors'
 
 type SutTypes = {
   sut: RenderResult
-  validationSpy: ValidationSpy
+  validationStub: ValidationStub
   authenticationSpy: AuthenticationSpy
   saveAccessTokenMock: SaveAccessTokenMock
 }
@@ -21,14 +21,14 @@ type SutParams = {
 const history = createMemoryHistory({ initialEntries: ['/login'] })
 
 const makeSut = (params?: SutParams): SutTypes => {
-  const validationSpy = new ValidationSpy()
+  const validationStub = new ValidationStub()
   const authenticationSpy = new AuthenticationSpy()
   const saveAccessTokenMock = new SaveAccessTokenMock()
-  validationSpy.errorMessage = params?.validationError
+  validationStub.errorMessage = params?.validationError
   const sut = render(
     <Router history={history}>
       <Login
-        validation={validationSpy}
+        validation={validationStub}
         authentication={authenticationSpy}
         saveAccessToken={saveAccessTokenMock}
       />
@@ -37,7 +37,7 @@ const makeSut = (params?: SutParams): SutTypes => {
 
   return {
     sut,
-    validationSpy,
+    validationStub,
     authenticationSpy,
     saveAccessTokenMock
   }
