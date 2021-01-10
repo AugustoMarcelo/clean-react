@@ -92,4 +92,20 @@ describe('Login', () => {
     cy.getByTestId('main-error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
     cy.url().should('equal', `${baseUrl}/login`)
   })
+
+  it('Should present save accessToken if valid credentials are provided', () => {
+    cy.intercept('POST', /login/, {
+      statusCode: 200,
+      body: {
+        accessToken: faker.random.uuid()
+      }
+    })
+    cy.getByTestId('email').type('mrclgst10@gmail.com')
+    cy.getByTestId('password').type('12345')
+    cy.getByTestId('submit').click()
+    cy.getByTestId('main-error').should('not.exist')
+    cy.getByTestId('spinner').should('not.exist')
+    cy.url().should('eq', `${baseUrl}/`)
+    cy.window().then(window => assert.isOk(window.localStorage.getItem('accessToken')))
+  })
 })
