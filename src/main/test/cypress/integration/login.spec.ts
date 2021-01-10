@@ -62,4 +62,19 @@ describe('Login', () => {
     cy.getByTestId('main-error').should('contain.text', 'Credenciais inválidas')
     cy.url().should('equal', `${baseUrl}/login`)
   })
+
+  it('Should present UnexpectedError on any other error different from 401', () => {
+    cy.intercept('POST', /login/, {
+      statusCode: faker.random.arrayElement([400, 403, 500]),
+      body: {
+        error: faker.random.words()
+      }
+    })
+    cy.getByTestId('email').type(faker.internet.email())
+    cy.getByTestId('password').type(faker.random.alphaNumeric(5))
+    cy.getByTestId('submit').click()
+    cy.getByTestId('spinner').should('not.exist')
+    cy.getByTestId('main-error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
+    cy.url().should('equal', `${baseUrl}/login`)
+  })
 })
