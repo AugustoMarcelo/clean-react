@@ -18,7 +18,7 @@ const SurveyList: React.FC = () => {
                 <span className={Styles.month}>03</span>
                 <span className={Styles.year}>2021</span>
               </time>
-              <p>Qual é seu framework web favorito?</p>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, facilis.</p>
             </div>
             <footer>Ver Resultado</footer>
           </li>
