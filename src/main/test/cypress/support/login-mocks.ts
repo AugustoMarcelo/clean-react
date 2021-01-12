@@ -7,7 +7,8 @@ export const mockUnexpectedError = (): void => Helper.mockUnexpectedError('POST'
 
 export const mockOk = (): void => Helper.mockOk('POST', /login/, {
   body: {
-    accessToken: faker.random.uuid()
+    accessToken: faker.random.uuid(),
+    name: faker.name.findName()
   }
 })
 
