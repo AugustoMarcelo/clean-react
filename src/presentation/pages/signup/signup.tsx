@@ -5,7 +5,6 @@ import { FormContext, ApiContext } from '@/presentation/contexts'
 import Styles from './signup-styles.scss'
 import { Validation } from '@/presentation/protocols/validation'
 import { AddAccount } from '@/domain/usecases'
-import { AccountModel } from '@/domain/models'
 
 type Props = {
   validation: Validation
