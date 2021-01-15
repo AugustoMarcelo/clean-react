@@ -1,6 +1,6 @@
 import faker from 'faker'
 
-export const mockInvalidCredentialsError = (url: RegExp): void => {
+export const mockUnauthorizedError = (url: RegExp): void => {
   cy.intercept('POST',url, {
     statusCode: 401,
     body: {
@@ -9,8 +9,8 @@ export const mockInvalidCredentialsError = (url: RegExp): void => {
   })
 }
 
-export const mockEmailInUseError = (url: RegExp): void => {
-  cy.intercept('POST',url, {
+export const mockForbiddenError = (method: any, url: RegExp): void => {
+  cy.intercept(method, url, {
     statusCode: 403,
     body: {
       error: faker.random.words()
@@ -18,7 +18,7 @@ export const mockEmailInUseError = (url: RegExp): void => {
   })
 }
 
-export const mockUnexpectedError = (method: any, url: RegExp): void => {
+export const mockServerError = (method: any, url: RegExp): void => {
   cy.intercept(method, url, {
     statusCode: faker.helpers.randomize([400, 404, 500]),
     body: {
