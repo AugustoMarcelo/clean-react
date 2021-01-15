@@ -1,7 +1,7 @@
 import faker from 'faker'
 
 export const mockUnauthorizedError = (url: RegExp): void => {
-  cy.intercept('POST',url, {
+  cy.intercept('POST', url, {
     statusCode: 401,
     body: {
       error: faker.random.words()
@@ -30,6 +30,6 @@ export const mockServerError = (method: any, url: RegExp): void => {
 export const mockOk = (method: any, url: RegExp, responseBody: any): void => {
   cy.intercept(method, url, {
     statusCode: 200,
-    ...responseBody
+    responseBody
   }).as('request')
 }
