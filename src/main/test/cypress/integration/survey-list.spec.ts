@@ -23,7 +23,7 @@ describe('SurveyList', () => {
     cy.getByTestId('error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
   })
 
-  it.only('Should reload on button click', () => {
+  it('Should reload on button click', () => {
     mockUnexpectedError()
     cy.getByTestId('error').should('contain.text', 'Algo de errado aconteceu. Tente novamente em breve.')
     mockSuccess()

@@ -1,12 +1,21 @@
 import faker from 'faker'
 
 export const mockUnauthorizedError = (url: RegExp): void => {
-  cy.intercept('POST', url, {
-    statusCode: 401,
-    body: {
+  cy.server()
+  cy.route({
+    method: 'POST',
+    url,
+    status: 401,
+    response: {
       error: faker.random.words()
     }
   })
+  // cy.intercept('POST', url, {
+  //   statusCode: 401,
+  //   body: {
+  //     error: faker.random.words()
+  //   }
+  // })
 }
 
 export const mockForbiddenError = (method: any, url: RegExp): void => {
@@ -28,8 +37,15 @@ export const mockServerError = (method: any, url: RegExp): void => {
 }
 
 export const mockOk = (method: any, url: RegExp, responseBody: any): void => {
-  cy.intercept(method, url, {
-    statusCode: 200,
-    body: responseBody
+  cy.server()
+  cy.route({
+    method,
+    url,
+    status: 200,
+    response: responseBody
   }).as('request')
+  // cy.intercept(method, url, {
+  //   statusCode: 200,
+  //   body: responseBody
+  // }).as('request')
 }
