@@ -6,8 +6,11 @@ import * as Http from '../utils/http-mocks'
 const path = /login/
 const mockInvalidCredentialsError = (): void => Http.mockUnauthorizedError(path)
 const mockUnexpectedError = (): void => Http.mockServerError('POST', path)
-const mockSuccess = (): void => Http.mockOk('POST', path, 'fx:account')
-
+const mockSuccess = (): void => {
+  cy.fixture('account').then(account => {
+    Http.mockOk('POST', path, account)
+  })
+}
 const populateFields = (): void => {
   cy.getByTestId('email').type(faker.internet.email())
   cy.getByTestId('password').type(faker.random.alphaNumeric(5))
