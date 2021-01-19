@@ -8,4 +8,4 @@ deploy:
   provider: heroku
   api_key: $HEROKU_API
   app: fordevs-clean-react
-  skip_cleanup: true
+  cleanup: false
