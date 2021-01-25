@@ -1,9 +1,17 @@
 language: node_js
 node_js:
   - 14
+addons:
+  packages:
+    - libgconf-2-4
+cache:
+  npm: true
+  directories:
+    - ~/.chache
 script:
   - eslint 'src/**'
   - npm run test:coveralls
+  - npm run test:cypress:ci
 deploy:
   provider: heroku
   api_key: $HEROKU_API
